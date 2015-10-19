@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-NODE="nodejs"
+NODE="node"
 PART="$TEST_PART"
 CABAL="cabal"
 GHCJSBOOT="ghcjs-boot"
@@ -9,11 +9,7 @@ TESTRUNNER="./dist/build/test/test"
 
 travis_boot() {
     case "$PART" in
-        CORE1)
-            ghcjs_boot -j2 --build-stage1-unbooted --no-prof
-            cabal_install random QuickCheck stm syb
-        ;;
-        CORE2)
+        CORE-GHC|CORE-CONC|CORE-INTEGER|CORE-PKG|CORE-FAY)
             ghcjs_boot -j2 --build-stage1-unbooted --no-prof
             cabal_install random QuickCheck stm syb
         ;;
@@ -31,11 +27,20 @@ travis_boot() {
 
 travis_test() {
     case "$PART" in
-        CORE1)
-            run_tests --no-profiling -t ghc -t conc -t integer
+        CORE-GHC)
+            run_tests --no-profiling -t ghc
         ;;
-        CORE2)
-            run_tests --no-profiling -t pkg -t fay
+        CORE-CONC)
+            run_tests --no-profiling -t conc
+        ;;
+        CORE-INTEGER)
+            run_tests --no-profiling -t integer
+        ;;
+        CORE-PKG)
+            run_tests --no-profiling -t pkg
+        ;;
+        CORE-FAY)
+            run_tests --no-profiling -t fay
         ;;
         PROFILING)
             run_tests -t profiling
@@ -50,7 +55,16 @@ travis_test() {
 }
 
 ghcjs_boot() {
-    "$GHCJSBOOT" --dev --ghcjs-boot-dev-branch "$TRAVIS_BRANCH" --shims-dev-branch "$TRAVIS_BRANCH" --no-haddock --with-node "$NODE" "$@"
+	case "$TRAVIS_BRANCH" in
+		master)
+			export BRANCH=master
+		;;
+		# Default to master
+		*)
+			export BRANCH=master
+		;;
+	esac
+    "$GHCJSBOOT" --dev --ghcjs-boot-dev-branch "$BRANCH" --shims-dev-branch "$BRANCH" --no-haddock --with-node "$NODE" "$@"
 }
 
 cabal_install() {
