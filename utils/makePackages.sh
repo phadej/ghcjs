@@ -251,6 +251,26 @@ if [ ! -f ./compiler/ghc.cabal ]; then
     ./configure
 fi
 
+if [ ! -f ./libraries/directory/configure ]; then
+	echo "autoreconf directory package"
+	( cd libraries/directory; autoreconf -i )
+fi
+
+if [ ! -f ./libraries/time/configure ]; then
+	echo "autoreconf time package"
+	( cd libraries/time; autoreconf -i )
+fi
+
+if [ ! -f ./libraries/process/configure ]; then
+	echo "autoreconf process package"
+	( cd libraries/process; autoreconf -i )
+fi
+
+if [ ! -f ./libraries/unix/configure ]; then
+	echo "autoreconf unix package"
+	( cd libraries/unix; autoreconf -i )
+fi
+
 if [ ! -f ./libraries/time/lib/include/HsTimeConfig.h ]; then
     echo "configuring time package"
 (
