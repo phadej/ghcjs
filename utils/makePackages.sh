@@ -27,6 +27,11 @@ set -euo pipefail
 # the upstream GHC tree remains usable to build/validate the upstream
 # compiler.
 
+if [ "${POSIXLY_CORRECT:-0}" = "1" ]; then
+  echo "unset POSIXLY_CORRECT"
+  exit 1
+fi
+
 if [ $# -ne 1 ];
 then
   echo "usage: $0 [link|copy]"
