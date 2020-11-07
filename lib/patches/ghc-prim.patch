@@ -1,12 +1,6 @@
 diff -X ../utils/updatePatches.excludes -Nru upstream/pkg/ghc-prim/ghc-prim.cabal boot/pkg/ghc-prim/ghc-prim.cabal
 --- upstream/pkg/ghc-prim/ghc-prim.cabal	2018-12-04 07:39:03.755980410 -0800
 +++ boot/pkg/ghc-prim/ghc-prim.cabal	2018-12-04 07:40:10.694617879 -0800
-@@ -1,4 +1,4 @@
--cabal-version:  2.1
-+cabal-version:  2.2
- name:           ghc-prim
- version:        0.5.3
- -- NOTE: Don't forget to update ./changelog.md
 @@ -19,22 +19,24 @@
      location: http://git.haskell.org/ghc.git
      subdir:   libraries/ghc-prim

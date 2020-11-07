@@ -1,12 +1,6 @@
 diff -X ../utils/updatePatches.excludes -Nru upstream/pkg/base/base.cabal boot/pkg/base/base.cabal
 --- upstream/pkg/base/base.cabal	2019-05-07 22:52:33.000000000 -0700
 +++ boot/pkg/base/base.cabal	2019-05-15 23:04:00.381934406 -0700
-@@ -1,4 +1,4 @@
--cabal-version:  2.1
-+cabal-version:  2.2
- name:           base
- version:        4.12.0.0
- -- NOTE: Don't forget to update ./changelog.md
 @@ -52,7 +52,7 @@
  Flag integer-gmp
      Description: Use integer-gmp
