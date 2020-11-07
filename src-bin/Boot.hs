@@ -928,7 +928,6 @@ cabalGlobalFlags = do
   instDir  <- view (beLocations . blGhcjsTopDir)
   return ["--config-file"
          ,toTextI (instDir </> "cabalBootConfig")
-         ,"--ignore-sandbox"
          ]
 
 cabalInstallFlags :: Bool -> B [Text]
