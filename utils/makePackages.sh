@@ -168,7 +168,7 @@ copy_patch_boot_package_sdist() {
   (
   cd "$PKGSRC"
   rm -f "dist-install/$PKG-*.tar.gz"
-  cabal "${CMDPREFIX}sdist" --builddir=dist-install
+  cabal v2-sdist --ignore-project --output-directory=dist-install
   )
   # unpack the source distribution
   for SRCDISTTMP in $PKGSRC/dist-install/$PKG-*.tar.gz; do
